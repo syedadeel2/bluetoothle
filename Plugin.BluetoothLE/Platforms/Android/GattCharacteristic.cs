@@ -50,7 +50,7 @@ namespace Plugin.BluetoothLE
                     if (!this.context.Gatt.WriteCharacteristic(this.native))
                         throw new BleException("Failed to write to characteristic");
 
-                    ob.Respond( new CharacteristicGattResult(this, value));
+                    ob.Respond(new CharacteristicGattResult(this, value));
                 }
                 catch (Exception ex)
                 {
@@ -217,9 +217,7 @@ namespace Plugin.BluetoothLE
                         else
                             ob.OnError(new BleException($"Notification error - {args.Status}"));
                     })
-            )
-            .Publish()
-            .RefCount();
+            );
 
             return this.notifyOb;
         }
@@ -293,7 +291,7 @@ namespace Plugin.BluetoothLE
             if ((useIndicationsIfAvailable || !this.CanNotify()) && this.CanIndicate())
                 return BluetoothGattDescriptor.EnableIndicationValue.ToArray();
 
-             return BluetoothGattDescriptor.EnableNotificationValue.ToArray();
+            return BluetoothGattDescriptor.EnableNotificationValue.ToArray();
         }
     }
 }
